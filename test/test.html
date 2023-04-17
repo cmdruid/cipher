@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+    <script src="../../dist/bundle.min.js"></script>
+  </head>
+  <body>
+    <script type="module">
+      console.log(window.cryptoUtils)
+      const { Noble } = window.cryptoUtils
+      const { sign, verify, getPublicKey, utils } = Noble
+      const privKey   = utils.randomPrivateKey()
+      const message   = utils.randomBytes()
+      const pubkey    = getPublicKey(privKey)
+      const signature = await sign(message, privKey)
+      const isValid   = verify(signature, message, pubkey)
+      console.log('Signature is valid:', isValid)
+    </script>
+  </body>
+</html>
